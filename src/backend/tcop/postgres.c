@@ -1361,20 +1361,6 @@ exec_parse_message(const char *query_string,	/* string to execute */
 										&paramTypes,
 										&numParams);
 
-		/*
-		 * Check all parameter types got determined.
-		 */
-		for (i = 0; i < numParams; i++)
-		{
-			Oid			ptype = paramTypes[i];
-
-			if (ptype == InvalidOid || ptype == UNKNOWNOID)
-				ereport(ERROR,
-						(errcode(ERRCODE_INDETERMINATE_DATATYPE),
-						 errmsg("could not determine data type of parameter $%d",
-								i + 1)));
-		}
-
 		if (log_parser_stats)
 			ShowUsage("PARSE ANALYSIS STATISTICS");
 
